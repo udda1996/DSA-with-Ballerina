@@ -50,6 +50,42 @@ function traverseLevelOrder(TreeNode root)  {
     }
 }
 
+function findMaxIterative(TreeNode root) {
+    int max = root.value;
+    TreeNode[] queue = [];  // queue to store the nodes of the tree
+    queue.push(root);
+
+    while (queue.length() > 0) {
+        TreeNode node = queue.shift();
+        if (node.value > max) {
+            max = node.value;
+        }
+        if (node.left != null) {
+            queue.push(<TreeNode>node.left);
+        }
+        if (node.right != null) {
+            queue.push(<TreeNode>node.right);
+        }
+    }
+    io:println("Maximum value in the binary tree: ", max);
+}
+
+function findMaxRecurssive(TreeNode? node) returns int {
+    if (node == null) {
+        return int:MIN_VALUE;
+    }
+    int max = node.value;
+    int leftMax = findMaxRecurssive(node.left);
+    int rightMax = findMaxRecurssive(node.right);
+    if (leftMax > max) {
+        max = leftMax;
+    }
+    if (rightMax > max) {
+        max = rightMax;
+    }
+    return max;
+}
+
 public function main() {
     // initialization of the binary tree
     TreeNode root = {
@@ -89,4 +125,5 @@ public function main() {
     traversePostorder(root);
     io:println("Level order traversal of the binary tree: ");
     traverseLevelOrder(root);
+    io:println("Maximum value in the binary tree: ", findMaxRecurssive(root));
 }
