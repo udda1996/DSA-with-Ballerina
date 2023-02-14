@@ -1,6 +1,6 @@
 [package]
 org = "tharinduu"
-name = "tree"
+name = "doublyLinkedList"
 version = "0.1.0"
 distribution = "2201.3.1-rc1.1"
 

@@ -1,6 +1,6 @@
 [package]
 org = "tharinduu"
-name = "graph"
+name = "binarySearchTree"
 version = "0.1.0"
 distribution = "2201.3.1-rc1.1"
 
