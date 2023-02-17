@@ -1,12 +1,12 @@
 import ballerina/io;
 
-type LinkNode record {
+type ListNode record {
     int value;
-    LinkNode? next;
+    ListNode? next;
 };
 
 type LinkedList record {
-    LinkNode? head;
+    ListNode? head;
     int size;
 };
 
@@ -14,14 +14,15 @@ function newLinkedList() returns LinkedList {
     return {head: null, size: 0};
 }
 
+// Add a new node to the end of the list
 function addNode(LinkedList l, int value) returns LinkedList {
-    LinkNode newNode = {value: value, next: null};
+    ListNode newNode = {value: value, next: null};
     if (l.head == null) {
         l.head = newNode;
     } else {
-        LinkNode current = <LinkNode>l.head;
+        ListNode current = <ListNode>l.head;
         while (current.next != null) {
-            current = <LinkNode>current.next;
+            current = <ListNode>current.next;
         }
         current.next = newNode;
     }
@@ -29,12 +30,40 @@ function addNode(LinkedList l, int value) returns LinkedList {
     return l;
 }
 
+
+// delete a node from the list
+function deleteNode(LinkedList l, ListNode node) returns LinkedList {
+    if (l.head == node) {
+        l.head = node.next;
+    } else {
+        ListNode current = <ListNode>l.head;
+        while (current.next != node) {
+            current = <ListNode>current.next;
+        }
+        current.next = node.next;
+    }
+    l.size = l.size - 1;
+    return l;
+}
+    
+// print the list
 function printList(LinkedList l) {
-    LinkNode? current = l.head;
+    ListNode? current = l.head;
     while (current != null) {
         io:println(current.value);
         current = current.next;
     }
+}
+
+public function main() {
+    LinkedList l = newLinkedList();
+    l = addNode(l, 1);
+    l = addNode(l, 2);
+    l = addNode(l, 5);
+    l = addNode(l, 8);
+    l = addNode(l, 10);
+
+    printList(l);
 }
 
 
