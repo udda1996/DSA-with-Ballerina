@@ -45,6 +45,49 @@ function deleteNode(LinkedList l, ListNode node) returns LinkedList {
     l.size = l.size - 1;
     return l;
 }
+
+// delete the first node
+function deleteFirstNode(LinkedList l) returns LinkedList {
+    if (l.head != null) {
+        l.head = (<ListNode>l.head).next;
+        l.size = l.size - 1;
+    }
+    return l;
+}
+
+// delete the last node
+function deleteLastNode(LinkedList l) returns LinkedList {
+    if (l.head != null) {
+        if ((<ListNode>l.head).next == null) {
+            l.head = null;
+        } else {
+            ListNode current = <ListNode>l.head;
+            while ((<ListNode>current.next).next != null) {
+                current = <ListNode>current.next;
+            }
+            current.next = null;
+        }
+        l.size = l.size - 1;
+    }
+    return l;
+}
+
+// reverse the list
+function reverseList(LinkedList l) returns LinkedList {
+    if (l.head != null) {
+        ListNode? current = l.head;
+        ListNode? previous = null;
+        ListNode? next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        l.head = previous;
+    }
+    return l;
+}
     
 // print the list
 function printList(LinkedList l) {
