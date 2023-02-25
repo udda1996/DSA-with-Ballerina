@@ -50,6 +50,16 @@ public function search(TreeNode? root, int value) returns boolean {
     }
 }
 
+public function validate(TreeNode? root, int min, int max) returns boolean {
+    if (root == null) {
+        return true;
+    }
+    if (root.value < min || root.value > max) {
+        return false;
+    }
+    return validate(root.left, min, root.value) && validate(root.right, root.value, max);
+}
+
 public function main() {
     BinarySearchTree tree = {root: null};
     insertValue(tree, 5);
