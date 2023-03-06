@@ -33,5 +33,22 @@ function heapify(int[] queue, int index) {
 }
 
 public function main() {
-    io:println("Hello, World!");
+    // create a max priority queue with size 5
+    MaxPriorityQueue maxPriorityQueue = createMaxPriorityQueue(5);
+
+    // insert values into the queue
+    insert(maxPriorityQueue, 10);
+    insert(maxPriorityQueue, 20);
+    insert(maxPriorityQueue, 30);
+    insert(maxPriorityQueue, 40);
+    insert(maxPriorityQueue, 50);
+
+    // insert a value that is greater than the current maximum
+    insert(maxPriorityQueue, 60);
+
+    // print the elements in the queue
+    io:println("Elements in the max priority queue:");
+    foreach int i in maxPriorityQueue.queue {
+        io:println(i);
+    }
 }
