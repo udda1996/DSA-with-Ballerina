@@ -13,23 +13,60 @@ function createMaxPriorityQueue(int size) returns MaxPriorityQueue {
 function insert(MaxPriorityQueue maxPriorityQueue, int value) {
     if (maxPriorityQueue.queue.length() < maxPriorityQueue.size) {
         maxPriorityQueue.queue[maxPriorityQueue.queue.length()] = value;
-        heapify(maxPriorityQueue.queue, maxPriorityQueue.queue.length() - 1);
+        heapifyBottomUp(maxPriorityQueue.queue, maxPriorityQueue.queue.length() - 1);
     } else {
         if (maxPriorityQueue.queue[0] < value) {
             maxPriorityQueue.queue[0] = value;
-            heapify(maxPriorityQueue.queue, maxPriorityQueue.queue.length() - 1);
+            heapifyBottomUp(maxPriorityQueue.queue, maxPriorityQueue.queue.length() - 1);
         }
     }
 }
 
-function heapify(int[] queue, int index) {
+// Bottom up hepify (swim)
+function heapifyBottomUp(int[] queue, int index) {
     int parentIndex = (index - 1) / 2;
     if (queue[parentIndex] < queue[index]) {
         int temp = queue[parentIndex];
         queue[parentIndex] = queue[index];
         queue[index] = temp;
-        heapify(queue, parentIndex);
+        heapifyBottomUp(queue, parentIndex);
     }
+}
+
+function deleteMax(MaxPriorityQueue maxPriorityQueue) returns int {
+    int max = maxPriorityQueue.queue[0];
+    int tail = maxPriorityQueue.queue.pop();
+    maxPriorityQueue.queue[0] = tail;
+    heapifyTopDown(maxPriorityQueue.queue, 0);
+    return max;
+}
+
+function heapifyTopDown(int[] queue, int index) {
+    if (queue.length() > 2*index) {
+        int maxElement = queue[index];
+        int maxIndex = index;
+        if (2*index + 1 <= queue.length() - 1 && maxElement < queue[2*index + 1]) {
+            maxElement = queue[2*index + 1];
+            maxIndex = 2*index + 1;
+        }
+        if (2*index + 2 <= queue.length() - 1 && maxElement < queue[2*index + 2]) {
+            maxElement = queue[2*index + 2];
+            maxIndex = 2*index + 2;
+        }
+
+        if (index != maxIndex){
+            int temp = queue[index];
+            queue[index] = queue[maxIndex];
+            queue[maxIndex] = temp;
+
+            heapifyTopDown(queue, maxIndex);
+        } else {
+            return;
+        }
+    } else {
+        return;
+    }
+    
 }
 
 public function main() {
