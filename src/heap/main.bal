@@ -1,4 +1,5 @@
 import ballerina/io;
+import ballerina/test;
 
 type MaxPriorityQueue record {
     int[] queue;
@@ -71,7 +72,7 @@ function heapifyTopDown(int[] queue, int index) {
 
 public function main() {
     // create a max priority queue with size 5
-    MaxPriorityQueue maxPriorityQueue = createMaxPriorityQueue(5);
+    MaxPriorityQueue maxPriorityQueue = createMaxPriorityQueue(6);
 
     // insert values into the queue
     insert(maxPriorityQueue, 10);
@@ -88,4 +89,12 @@ public function main() {
     foreach int i in maxPriorityQueue.queue {
         io:println(i);
     }
+
+    // delete the root of thee heap
+    int max = deleteMax(maxPriorityQueue);
+    test:assertEquals(max, 60, "Max value should be 60");
+    test:assertEquals(maxPriorityQueue.queue.length(), 5, "Queue size should be 5");
+    test:assertEquals(maxPriorityQueue.queue[0], 50, "Root node should be 50");
+
+    io:println("The new root value is : ", maxPriorityQueue.queue[0]);
 }
