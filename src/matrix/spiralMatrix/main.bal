@@ -1,4 +1,5 @@
 import ballerina/io;
+
 function spiralOrder(int[][] matrix) returns int[] {
     int[] result = [];
     int rowStart = 0;
