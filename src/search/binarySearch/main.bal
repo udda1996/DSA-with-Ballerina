@@ -14,6 +14,23 @@ public function binarySearch(int[] arr, int l, int r, int x) returns int {
     return -1;
 }
 
+public function binarySearchIterative(int[] arr, int l, int r, int x) returns int {
+    int low = l;
+    int high = r;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (arr[mid] == x) {
+            return mid;
+        }
+        if (arr[mid] < x) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return -1;
+}
+
 public function main() {
     int[] arr = [2, 3, 4, 10, 40]; // Array must be sorted
     int n = arr.length();
