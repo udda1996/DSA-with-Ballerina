@@ -9,6 +9,7 @@ type Queue record {
     int length;
 };
 
+// creates a new queue
 function newQueue() returns Queue {
     Queue q = {
         front: null,
@@ -18,6 +19,7 @@ function newQueue() returns Queue {
     return q;
 }
 
+// adds an element to queue
 function enqueue(Queue q, int data) {
     ListNode node = {data: data, next: null};
     if (q.length == 0) {
@@ -30,6 +32,7 @@ function enqueue(Queue q, int data) {
     q.length = q.length + 1;
 }
 
+// removes the first element from queue
 function dequeue(Queue q) returns int {
     if (q.length == 0) {
         panic error("Queue is empty");
