@@ -29,7 +29,7 @@ public function merge(int[] left, int[] right) returns int[] {
             i = i + 1;
             k = k + 1;
         } else {
-            result[result.length()] = right[j];
+            result[k] = right[j];
             j = j + 1;
             k = k + 1;
         }
