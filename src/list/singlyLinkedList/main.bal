@@ -246,9 +246,8 @@ function removeLoop(LinkedList l) returns LinkedList {
                 temp = (<ListNode>temp).next;
                 fast = (<ListNode>fast).next;
             }
-            if (fast.next != null) {
-                fast.next = null;
-            }
+            ListNode lastNode = <ListNode>fast;
+            lastNode.next = null;
         }
     }
     return l;
@@ -278,7 +277,6 @@ function mergeLists(LinkedList l1, LinkedList l2) returns LinkedList {
     }
     return mergedList;
 }
-
 
 // add two linked lists
 function addTwoLinkedLists(LinkedList l1, LinkedList l2) returns LinkedList {
